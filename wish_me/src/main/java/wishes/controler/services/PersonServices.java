@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import wishes.config.WishesConfiguration;
+import wishes.repository.AttachmentRepository;
 import wishes.repository.PersonRepository;
 import wishes.repository.RoleRepository;
 import wishes.repository.WishRepository;
@@ -16,16 +18,21 @@ import wishes.repository.WishRepository;
 @RestController
 @RequestMapping("/people")
 public class PersonServices {
-
-	@Autowired
-	private PersonRepository personRepo;
 	
 	@Autowired
 	private WishRepository wishRepo;
 	
 	@Autowired
-	private RoleRepository roleRepo;
+	private AttachmentRepository attachRepo;
 	
+	@Autowired
+	private PersonRepository personRepo;
+	
+	@Autowired
+	private RoleRepository roleRepo;
+
+	@Autowired
+	private WishesConfiguration conf;
 		
 	/**
 	 * Check if a person is included in a list

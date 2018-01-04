@@ -65,13 +65,15 @@ public class Wish {
 	private Error error = null;
 	
 	private WishStatus status;
-	
-		
-	
-	public Date getDateFor() {
-		return dateFor;
+
+	public Attachment getAttachment() {
+		return attachment;
 	}
 
+	public Date getDateFor() {
+		return dateFor;
+	}		
+	
 	public String getDescription() {
 		return description;
 	}
@@ -114,6 +116,11 @@ public class Wish {
 
 	public WishStatus getStatus() {
 		return status;
+	}
+
+	public void setAttachment(Attachment attachment) {
+		this.attachment = attachment;
+		updateModified();
 	}
 
 	public void setDateFor(Date dateFor) {

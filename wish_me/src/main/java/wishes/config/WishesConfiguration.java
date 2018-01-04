@@ -9,6 +9,10 @@ import wishes.controler.model.Error;
 import wishes.controler.Logger;
 import wishes.controler.CustomErrorController;
 import wishes.controler.model.Constants.*;
+import wishes.repository.AttachmentRepository;
+import wishes.repository.PersonRepository;
+import wishes.repository.RoleRepository;
+import wishes.repository.WishRepository;
 
 @Configuration
 public class WishesConfiguration {

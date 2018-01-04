@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import wishes.controler.model.Constants;
 import wishes.config.WishesConfiguration;
 import wishes.controler.model.Constants.RoleType;
 import wishes.model.Attachment;
 import wishes.model.Person;
 import wishes.model.Role;
+import wishes.model.Wish;
 import wishes.repository.AttachmentRepository;
 import wishes.repository.PersonRepository;
 import wishes.repository.RoleRepository;
@@ -37,7 +40,7 @@ public class GeneralServices {
 	private WishRepository wishRepo;
 	
 	@Autowired
-	private AttachmentRepository attachmentRepo;
+	private AttachmentRepository attachRepo;
 	
 	@Autowired
 	private PersonRepository personRepo;
@@ -46,7 +49,7 @@ public class GeneralServices {
 	private RoleRepository roleRepo;
 
 	@Autowired
-	private WishesConfiguration eConf;
+	private WishesConfiguration conf;
 	
 	/**
 	 * Fills the database with some coherent data to do tests 
@@ -54,7 +57,7 @@ public class GeneralServices {
 	 */
 	@RequestMapping(value="/init", method=RequestMethod.GET)
     public String init() {
-		eConf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+		conf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
 		StringBuffer result = new StringBuffer();
     	
 		Role roleAdm = new Role();
@@ -67,6 +70,12 @@ public class GeneralServices {
     	Person personC = new Person();
     	Person personD = new Person();
     	Person personE = new Person();
+    	
+    	Wish wishA = new Wish();
+    	Wish wishB = new Wish();
+    	Wish wishC = new Wish();
+    	Wish wishD = new Wish();
+    	Wish wishE = new Wish();
     	
     	Attachment attachment = null;
     	
@@ -182,24 +191,28 @@ public class GeneralServices {
     	try {
     		result.append("Alta de deseos de prueba...");
     		
-	    	/*halloween.setDate(new Date());
-	    	halloween.setName("Halloween");
-	    	halloween.setOwner(personA);
-	    	halloween.setCalculated(false);
-	    	halloween.setTotal(0);
-	    	halloween.setDescription("Halloween party");
+	    	wishA.setName("Dron");
+	    	wishA.setDescription("Parrot en amazon");
+	    	wishA.setDateFor(new Date());
+	    	wishA.setEventFor("Reyes");
+	    	wishA.setLocation("http://www.amazon.es");
+	    	wishA.setOwner(personA);
+	    	wishA.setLocker(personE);
+	    	wishA.setStatus(Constants.WishStatus.LOCKED);
+	    	wishA.setPrice(100.00);
 	    	
-	    	activityRepo.save(halloween);
-	    	Thread.sleep(1000);
+	    	wishB.setName("Libro");
+	    	wishB.setDescription("La ultima cupada del Mango");
+	    	wishB.setDateFor(new Date());
+	    	wishB.setEventFor("14 Febrero");
+	    	wishB.setLocation("http://www.aliexpress.com");
+	    	wishB.setOwner(personE);
+	    	wishB.setLocker(null);
+	    	wishB.setStatus(Constants.WishStatus.FREE);
+	    	wishB.setPrice(999.99);
 	    	
-	    	thanksgiving.setDate(new Date());
-	    	thanksgiving.setName("Thanksgiving");
-	    	thanksgiving.setOwner(personB);
-	    	thanksgiving.setCalculated(false);
-	    	thanksgiving.setTotal(0);
-	    	thanksgiving.setDescription("Thanksgiving dinner");
-	    	
-	    	activityRepo.save(thanksgiving);*/
+	    	wishRepo.save(wishA);
+	    	wishRepo.save(wishB);
     	
     	}	catch (Exception e) {
     		result.append("ERROR\n" + e.getMessage());
@@ -229,7 +242,7 @@ public class GeneralServices {
 	@RequestMapping(value="/logtail", method=RequestMethod.GET)
     public String getLogTail(@RequestParam(value="log", defaultValue="wout.log") String logName,
     		@RequestParam(value="size", defaultValue="100") int bufferSize) {
-		eConf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+		conf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
 		String result = "";
 		
 		int size = bufferSize * 1024;
@@ -284,7 +297,7 @@ public class GeneralServices {
 	 */
 	@RequestMapping(value="/ping", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
     public String ping() {
-		eConf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+		conf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
 		return "PONG";
     }
 	
@@ -294,7 +307,7 @@ public class GeneralServices {
 	 */
 	@RequestMapping(value="/timestamp", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
 	public String timestamp () {
-		eConf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+		conf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
 		String result = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(Calendar.getInstance().getTime());
 		return result;
     }
