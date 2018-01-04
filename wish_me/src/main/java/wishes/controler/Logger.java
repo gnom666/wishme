@@ -1,6 +1,8 @@
-package wishes.controler.model;
+package wishes.controler;
 
 import org.apache.commons.logging.LogFactory;
+
+import wishes.controler.model.Constants;
 
 public class Logger {
 	

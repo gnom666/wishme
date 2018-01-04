@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import wishes.controler.model.Error;
-import wishes.controler.model.Logger;
-import wishes.controler.model.CustomErrorController;
+import wishes.controler.Logger;
+import wishes.controler.CustomErrorController;
 import wishes.controler.model.Constants.*;
 
 @Configuration
