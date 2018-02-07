@@ -47,14 +47,14 @@ public class AttachmentServices {
 		if (wish == null) {
 			return new AttachmentOut(
 					new Attachment()
-					.setError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.WISH_NOT_FOUND, "Wish not found")));
+					.putError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.WISH_NOT_FOUND, "Wish not found")));
 		}
 		
 		Attachment attachment = attachRepo.findByWish(wish);
 		if (attachment == null) {
 			return new AttachmentOut(
 					new Attachment()
-					.setError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.ATTACHMENT_NOT_FOUND, "Attachment not found or does not exist")));
+					.putError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.ATTACHMENT_NOT_FOUND, "Attachment not found or does not exist")));
 		}
 		
 		return new AttachmentOut(attachment);
@@ -72,7 +72,7 @@ public class AttachmentServices {
 		if (attachment == null) {
 			return new AttachmentOut(
 					new Attachment()
-					.setError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.ATTACHMENT_NOT_FOUND, "Attachment not found or does not exist")));
+					.putError(conf.lastError().updateError(ErrorCode.ATTACHMENT_SERVICES, ErrorType.ATTACHMENT_NOT_FOUND, "Attachment not found or does not exist")));
 		}
 		
 		return new AttachmentOut(attachment);

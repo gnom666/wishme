@@ -1,6 +1,5 @@
 package wishes.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +13,10 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import wishes.controler.model.Constants.RoleType;
 
 
@@ -23,11 +26,15 @@ import wishes.controler.model.Constants.RoleType;
  *
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, updatable = false)
+	@Setter(AccessLevel.PROTECTED)
 	private long id;
 	
 	@Column(nullable = false, updatable = false, unique = true)
@@ -40,38 +47,9 @@ public class Role {
 	@Transient
 	private Error error = null;
 	
-	public Role() {
-		this.members = new ArrayList<>();
-		this.roleType = RoleType.GUEST;
-	}
-
-	public Error getError() {
-		return error;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public List<Person> getMembers() {
-		return members;
-	}
-
-	public RoleType getRoleType() {
-		return roleType;
-	}	
-
-	public Role setError(Error error) {
+	public Role putError(Error error) {
 		this.error = error;
 		return this;
 	}
 
-	public void setMembers(List<Person> members) {
-		this.members = members;
-	}
-
-	public void setRoleType(RoleType roleType) {
-		this.roleType = roleType;
-	}
-	
 }

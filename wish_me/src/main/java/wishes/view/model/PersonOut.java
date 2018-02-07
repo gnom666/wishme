@@ -3,6 +3,8 @@ package wishes.view.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import wishes.controler.model.Error;
 import wishes.model.Person;
 
@@ -33,7 +35,7 @@ public class PersonOut {
 		contacts = new ArrayList<>();
 		contactOf = new ArrayList<>();
 	}
-	
+
 	public PersonOut(Person person) {
 		this.wishes = new ArrayList<>();
 		this.locks = new ArrayList<>();

@@ -1,7 +1,5 @@
 package wishes.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,6 +19,11 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import wishes.controler.model.Error;
 
 /**
@@ -29,11 +32,15 @@ import wishes.controler.model.Error;
  *
  */
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Person { 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, updatable = false)
+	@Setter(AccessLevel.PROTECTED)
 	private long id;
 
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope=Wish.class)
@@ -102,59 +109,6 @@ public class Person {
 		return contacts;
 	}
 	
-	public List<Person> getContactOf() {
-		return contactOf;
-	}
-
-	public List<Person> getContacts() {
-		return contacts;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public Error getError() {
-		return error;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public List<Wish> getLocks() {
-		return locks;
-	}
-
-	public String getModified() {
-		return modified;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-	
-	public Role getRole() {
-		return role;
-	}
-	
-	public List<Wish> getWishes() {
-		return wishes;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
 	public List<Person> removeFromContactOf (Person person) {
 		for (Person p : contactOf) {
 			if (p.id == person.id) {
@@ -174,70 +128,9 @@ public class Person {
 		}
 		return contacts;
 	}
-
-	public void setContactOf(List<Person> contactOf) {
-		this.contactOf = contactOf;
-		updateModified();
-	}
-
-	public void setContacts(List<Person> contacts) {
-		this.contacts = contacts;
-		updateModified();
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-		updateModified();
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-		updateModified();
-	}
-
-	public Person setError(Error error) {
+	
+	public Person putError (Error error) {
 		this.error = error;
-		updateModified();
 		return this;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-		updateModified();
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-		updateModified();
-	}
-
-	public void setLocks(List<Wish> locks) {
-		this.locks = locks;
-		updateModified();
-	}
-	
-	public void setModified(String modified) {
-		this.modified = modified;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-		updateModified();
-	}
-	
-	public void setRole(Role role) {
-		this.role = role;
-		updateModified();
-	}
-	
-	public void setWishes(List<Wish> wishes) {
-		this.wishes = wishes;
-		updateModified();
-	}
-
-	private void updateModified() {
-		Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        modified = sdf.format(cal.getTime());
 	}
 }
