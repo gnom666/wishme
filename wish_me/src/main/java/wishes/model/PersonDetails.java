@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import wishes.controler.model.Constants;
+import wishes.model.*;
 
 /**
  * Class used for OAuth to connect with a Person

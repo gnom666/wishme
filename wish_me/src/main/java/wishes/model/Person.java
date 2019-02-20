@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,9 +30,10 @@ import wishes.controler.model.Error;
  * @author jorgerios
  *
  */
-@Entity
+
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 public class Person { 
 	

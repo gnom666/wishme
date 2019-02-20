@@ -70,7 +70,7 @@ public class WishesServices {
 	 * @param pid Person Id
 	 * @return List of WishOut
 	 */
-	@RequestMapping(value="/wishlistbyowner", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+	@RequestMapping(value="/wishlistbylocker", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
     public List<WishOut> wishListByLocker(@RequestParam(value="pid", defaultValue="0") long personId) {
 		conf.logger().log(this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
 		List<WishOut> all = new ArrayList<>();
@@ -80,5 +80,5 @@ public class WishesServices {
 		}
 		wishRepo.findByLocker(owner).forEach(w -> all.add(new WishOut(w)));
 		return all;
-    }
+    } //*/
 }

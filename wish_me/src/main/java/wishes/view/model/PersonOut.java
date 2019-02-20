@@ -36,7 +36,7 @@ public class PersonOut {
 		contactOf = new ArrayList<>();
 	}
 
-	public PersonOut(Person person) {
+	public PersonOut(wishes.model.Person person) {
 		this.wishes = new ArrayList<>();
 		this.locks = new ArrayList<>();
 		this.contacts = new ArrayList<>();
